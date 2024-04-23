@@ -9,10 +9,9 @@ import random
 import scipy.misc
 import numpy as np
 import tensorflow as tf
-from funcs import *
-from train_eval_model import *
-from utils.io_tools import read_dataset
-from utils.data_tools import process_data
+from model import *
+from utils.data_preprocessing import *
+from utils.preprocess import process_data
 
 slim = tf.contrib.slim
 

@@ -5,8 +5,8 @@ import os
 import time
 import numpy as np
 import tensorflow as tf
-from funcs import *
-from utils.data_tools import process_data
+from utils.data_preprocessing import *
+from utils.preprocess import process_data
 
 
 def lrelu(x, n, leak=0.2):
