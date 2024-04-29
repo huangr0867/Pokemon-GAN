@@ -10,10 +10,7 @@ import scipy.misc
 import numpy as np
 import tensorflow as tf
 from model import *
-from utils.data_preprocessing import *
-from utils.preprocess import process_data
-
-slim = tf.contrib.slim
+import utils
 
 flags = tf.app.flags
 FLAGS = flags.FLAGS

@@ -5,8 +5,7 @@ import os
 import time
 import numpy as np
 import tensorflow as tf
-from utils.data_preprocessing import *
-from utils.preprocess import process_data
+import utils
 
 
 def lrelu(x, n, leak=0.2):
@@ -33,7 +32,7 @@ def generator(input, random_dim, is_train, CHANNEL, reuse=False):
         flat_conv1 = tf.add(tf.matmul(input, w1), b1, name='flat_conv1')
         # Convolution, bias, activation, repeat!
         conv1 = tf.reshape(flat_conv1, shape=[-1, s4, s4, c4], name='conv1')
-        bn1 = tf.contrib.layers.batch_norm(
+        bn1 = tf.keras.layers.batch_norm(
             conv1,
             is_training=is_train,
             epsilon=1e-5,
@@ -48,7 +47,7 @@ def generator(input, random_dim, is_train, CHANNEL, reuse=False):
                 5, 5], strides=[
                 2, 2], padding="SAME", kernel_initializer=tf.truncated_normal_initializer(
                 stddev=0.02), name='conv2')
-        bn2 = tf.contrib.layers.batch_norm(
+        bn2 = tf.keras.layers.batch_norm(
             conv2,
             is_training=is_train,
             epsilon=1e-5,
@@ -62,7 +61,7 @@ def generator(input, random_dim, is_train, CHANNEL, reuse=False):
                 5, 5], strides=[
                 2, 2], padding="SAME", kernel_initializer=tf.truncated_normal_initializer(
                 stddev=0.02), name='conv3')
-        bn3 = tf.contrib.layers.batch_norm(
+        bn3 = tf.keras.layers.batch_norm(
             conv3,
             is_training=is_train,
             epsilon=1e-5,
@@ -76,7 +75,7 @@ def generator(input, random_dim, is_train, CHANNEL, reuse=False):
                 5, 5], strides=[
                 2, 2], padding="SAME", kernel_initializer=tf.truncated_normal_initializer(
                 stddev=0.02), name='conv4')
-        bn4 = tf.contrib.layers.batch_norm(
+        bn4 = tf.keras.layers.batch_norm(
             conv4,
             is_training=is_train,
             epsilon=1e-5,
@@ -90,7 +89,7 @@ def generator(input, random_dim, is_train, CHANNEL, reuse=False):
                 5, 5], strides=[
                 2, 2], padding="SAME", kernel_initializer=tf.truncated_normal_initializer(
                 stddev=0.02), name='conv5')
-        bn5 = tf.contrib.layers.batch_norm(
+        bn5 = tf.keras.layers.batch_norm(
             conv5,
             is_training=is_train,
             epsilon=1e-5,
@@ -100,12 +99,11 @@ def generator(input, random_dim, is_train, CHANNEL, reuse=False):
         act5 = tf.nn.relu(bn5, name='act5')
 
         # 128*128*3
-        conv6 = tf.layers.conv2d_transpose(
+        conv6 = tf.keras.layers.conv2d_transpose(
             act5, output_dim, kernel_size=[
                 5, 5], strides=[
                 2, 2], padding="SAME", kernel_initializer=tf.truncated_normal_initializer(
                 stddev=0.02), name='conv6')
-        # bn6 = tf.contrib.layers.batch_norm(conv6, is_training=is_train, epsilon=1e-5, decay = 0.9,  updates_collections=None, scope='bn6')
         act6 = tf.nn.tanh(conv6, name='act6')
     return act6
 
@@ -122,7 +120,7 @@ def discriminator(input, is_train, reuse=False):
                 5, 5], strides=[
                 2, 2], padding="SAME", kernel_initializer=tf.truncated_normal_initializer(
                 stddev=0.02), name='conv1')
-        bn1 = tf.contrib.layers.batch_norm(
+        bn1 = tf.keras.layers.batch_norm(
             conv1,
             is_training=is_train,
             epsilon=1e-5,
@@ -136,7 +134,7 @@ def discriminator(input, is_train, reuse=False):
                 5, 5], strides=[
                 2, 2], padding="SAME", kernel_initializer=tf.truncated_normal_initializer(
                 stddev=0.02), name='conv2')
-        bn2 = tf.contrib.layers.batch_norm(
+        bn2 = tf.keras.layers.batch_norm(
             conv2,
             is_training=is_train,
             epsilon=1e-5,
@@ -150,7 +148,7 @@ def discriminator(input, is_train, reuse=False):
                 5, 5], strides=[
                 2, 2], padding="SAME", kernel_initializer=tf.truncated_normal_initializer(
                 stddev=0.02), name='conv3')
-        bn3 = tf.contrib.layers.batch_norm(
+        bn3 = tf.keras.layers.batch_norm(
             conv3,
             is_training=is_train,
             epsilon=1e-5,
@@ -164,7 +162,7 @@ def discriminator(input, is_train, reuse=False):
                 5, 5], strides=[
                 2, 2], padding="SAME", kernel_initializer=tf.truncated_normal_initializer(
                 stddev=0.02), name='conv4')
-        bn4 = tf.contrib.layers.batch_norm(
+        bn4 = tf.keras.layers.batch_norm(
             conv4,
             is_training=is_train,
             epsilon=1e-5,
