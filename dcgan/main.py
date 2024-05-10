@@ -14,7 +14,7 @@ import argparse
 from process_data import *
 from config import *
 from model import *
-from dcgan.dcgan import *
+from dcgan import *
 
 def main():
     parser = argparse.ArgumentParser(description="Training DCGAN on Pokemons")

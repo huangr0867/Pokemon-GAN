@@ -93,7 +93,7 @@ class GANMonitor(keras.callbacks.Callback):
             img = keras.utils.array_to_img(generated_images[i]) 
             plt.imshow(img)
             plt.axis('off')
-        plt.savefig('~/Pokemon-GAN/dcgan/results/epoch_{:03d}.png'.format(epoch)) 
+        plt.savefig('./results/epoch_{:03d}.png'.format(epoch)) 
         # plt.show()
 
     def on_train_end(self, logs=None):
