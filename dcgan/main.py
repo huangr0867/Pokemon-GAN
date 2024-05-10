@@ -24,6 +24,7 @@ def main():
     
     args = vars(parser.parse_args())
     dataset = args['dataset']
+    visualize = args['visualize']
 
     train_images = process_data(dataset, visualize)
     # build the generator model
