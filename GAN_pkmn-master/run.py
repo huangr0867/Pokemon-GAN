@@ -31,8 +31,11 @@ def run(model, backbone, loss, run_note):
     fix_noise = torch.randn(64, config.MAIN.NZ, 1, 1, device = config.MAIN.DEVICE)
     #Creating the dataset
     image_path = []
-    for filename in glob.glob(os.path.join(config.MAIN.DATA_PATH, "*.jpg")):
-        image_path.append(filename)
+    for filename in os.listdir(config.MAIN.DATA_PATH):
+        if filename.endswith('.JPG'):
+            image_path.append('data/data_ready/' + filename)
+    # for filename in glob.glob(os.path.join(config.MAIN.DATA_PATH, "*.jpg")):
+    #     image_path.append(filename)
 
     pkmn_dataset = POKEMON_DS(
         image_path = image_path,
