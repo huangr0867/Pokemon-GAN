@@ -2,7 +2,7 @@
 
 A DCGAN model was implemented here using Tensorflow 2.0. Pokemons are generated using a dataset of 7536 pokemons. Some sample pokemons generated:
 
-<a href="url"><img src="dcgan/results/epoch_049.png" align="center" height="96" width="96" ></a>
+<a href="url"><img src="dcgan/results/epoch_049.png" align="center" height="500" width="500" ></a>
 
 ### **Prerequisites**
 
