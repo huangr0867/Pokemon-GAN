@@ -12,7 +12,8 @@ A DCGAN model was implemented here using Tensorflow 2.0. Pokemons are generated 
 cd dcgan
 ```
 
-2. Change the config.py file to fix your specific path files and configurations
+2. Change the config.py file to fix your specific path files and configurations like the number of epochs
+3. Unzip the data_ready.zip file in the data dir. This contains a subset of the actual dataset (503 images). Please contact ryan_y_huang[at]brown.edu for the entire set of images if you want to replicate our results
 
 ### **Train**
 
