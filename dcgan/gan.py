@@ -55,7 +55,7 @@ class DCGAN(keras.Model):
     def metrics(self):
         return [self.d_loss_metric, self.g_loss_metric]
 
-    def train(self, real_images, training=True):
+    def train_step(self, real_images, training=True):
         """
         Perform one training step.
 

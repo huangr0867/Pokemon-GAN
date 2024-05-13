@@ -11,10 +11,10 @@ import numpy as np
 
 import os
 import argparse
+from gan import DCGAN, GANMonitor
 from process_data import *
 from config import *
 from model import *
-from dcgan import *
 
 def main():
     parser = argparse.ArgumentParser(description="Training DCGAN on Pokemons")
