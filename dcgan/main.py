@@ -27,22 +27,24 @@ def main():
     visualize = args['visualize']
 
     train_images = process_data(dataset, visualize)
-    # build the generator model
+    
+    # generator
     generator = build_generator()
     generator.summary()
-    # build the discriminator model
+    
+    # discriminator
     discriminator = build_discriminator(64, 64, 3)  
     discriminator.summary()
     dcgan = DCGAN(discriminator=discriminator, generator=generator, latent_dim=LATENT_DIM)
 
     dcgan.compile(
-        d_optimizer=keras.optimizers.Adam(learning_rate=D_LR, beta_1 = 0.5),
-        g_optimizer=keras.optimizers.Adam(learning_rate=G_LR, beta_1 = 0.5),  
+        d_optimizer=keras.optimizers.Adam(learning_rate=D_LR, beta_1=0.5),
+        g_optimizer=keras.optimizers.Adam(learning_rate=G_LR, beta_1=0.5),  
         loss_fn=keras.losses.BinaryCrossentropy(),
     )
     
     dcgan.fit(train_images, epochs=NUM_EPOCHS, callbacks=[GANMonitor(num_img=16, latent_dim=LATENT_DIM)])
-
+    
 
 if __name__ == "__main__":
     main()
